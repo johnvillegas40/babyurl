@@ -3,11 +3,10 @@ const express = require("express"),
     morgan = require("morgan"),
     helmet = require("helmet"),
     yup = require("yup"),
-    monk = require("monk"),
     firebase = require("firebase/app")
 
 require("dotenv").config();
-
+require("firebase/database")
 
 const firebaseConfig = {
 
@@ -17,15 +16,12 @@ firebase.initializeApp(firebaseConfig)
 
 const database = firebase.database();
 
-let writeUserData = (urlInfo) => {
+let writeUserData = async (urlInfo) => {
     database.ref('urls/' + urlInfo.slug).set(urlInfo)
 }
 
 const { customAlphabet, urlAlphabet } = require("nanoid");
 
-const db = monk(process.env.MONGODB_URI);
-const urls = db.get("urls");
-urls.createIndex({ slug: 1 }, { unique: true });
 
 const app = express();
 app.enable('trust proxy');
@@ -42,8 +38,9 @@ app.get("/:id", async (req, res) => {
     const { id: slug } = req.params;
 
     try {
-        const url = await urls.findOne({ slug });
-
+        const url = await database.ref('/urls/' + slug).once('value').then(function(snapshot) {
+                    return snapshot.val()
+                });
         if (url) {
             res.redirect(301, url.url);
         }
@@ -77,10 +74,15 @@ app.post("/url", async (req, res, next) => {
             let existing = null;
             do {
                 slug = customAlphabet(urlAlphabet, 6)();
-                existing = await urls.findOne({ slug });
+                existing = await database.ref('/urls/' + slug).once('value').then(function(snapshot) {
+                    return snapshot.val()
+                  });
+                console.log(existing)
             } while (existing);
         } else {
-            const existing = await urls.findOne({ slug });
+            const existing = await database.ref('/urls/' + slug).once('value').then(function(snapshot) {
+                return snapshot.val()
+              });
             if (existing) {
                 throw new Error("Slug in use.");
             }
@@ -92,12 +94,12 @@ app.post("/url", async (req, res, next) => {
             slug,
         };
 
-        // const createdUrl = await urls.insert(newUrl);
-        
+
+        const createdUrl = await writeUserData(newUrl)
 
 
 
-        res.json(createdUrl);
+        res.json(newUrl);
     } catch (error) {
         next(error);
     }
