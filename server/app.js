@@ -1,5 +1,5 @@
 const express = require("express"),
-    cors = require("cors"),
+    path = require("path"),
     morgan = require("morgan"),
     helmet = require("helmet"),
     yup = require("yup"),
@@ -11,15 +11,17 @@ const { customAlphabet, urlAlphabet } = require("nanoid");
 
 const db = monk(process.env.MONGODB_URI);
 const urls = db.get("urls");
-urls.createIndex("slug");
+urls.createIndex({ slug: 1 }, { unique: true });
 
 const app = express();
+app.enable('trust proxy');
 
 app.use(helmet());
-app.use(morgan("tiny"));
-app.use(cors());
+app.use(morgan("common"));
 app.use(express.json());
 app.use(express.static("./public"));
+
+const notFoundPath = path.join(__dirname, 'public/404.html');
 
 // Redirect based on the slug
 app.get("/:id", async (req, res) => {
@@ -31,20 +33,17 @@ app.get("/:id", async (req, res) => {
         if (url) {
             res.redirect(301, url.url);
         }
-        res.redirect(`/?error=${slug} not found`)
+        res.status(404).sendFile(notFoundPath)
     } catch (error) {
-        res.redirect(`/?error=Link not found`)
+        res.status(404).sendFile(notFoundPath)
     }
 });
 
 // create the schema of the object using yup
 const schema = yup.object().shape({
-    slug: yup
-        .string()
-        .trim()
-        .matches(/[\w\-]/i),
+    slug: yup.string().trim().matches(/^[\w\-]+$/i),
     url: yup.string().trim().url().required(),
-});
+  });
 
 // creating the shortened link
 

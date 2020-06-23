@@ -3,6 +3,8 @@ const app = new Vue({
     data: {
         url: '',
         slug: '',
+        error: '',
+        formVisible: true,
         created: null,
     },
     methods: {
@@ -16,9 +18,17 @@ const app = new Vue({
                 },
                 body: JSON.stringify({
                     url: this.url,
-                    slug: this.slug,
+                    slug: this.slug || undefined,
                 })
             });
+            if (response.ok) {
+                const result = await response.json();
+                this.formVisible = false;
+                this.created = `https://babyurl.dev/${result.slug}`;
+            } else {
+                const result = await response.json();
+                this.error = result.message;
+            }
 
             this.created = await response.json();
         }
