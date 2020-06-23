@@ -3,9 +3,23 @@ const express = require("express"),
     morgan = require("morgan"),
     helmet = require("helmet"),
     yup = require("yup"),
-    monk = require("monk");
+    monk = require("monk"),
+    firebase = require("firebase/app")
 
 require("dotenv").config();
+
+
+const firebaseConfig = {
+
+  };
+
+firebase.initializeApp(firebaseConfig)
+
+const database = firebase.database();
+
+let writeUserData = (urlInfo) => {
+    database.ref('urls/' + urlInfo.slug).set(urlInfo)
+}
 
 const { customAlphabet, urlAlphabet } = require("nanoid");
 
@@ -78,7 +92,10 @@ app.post("/url", async (req, res, next) => {
             slug,
         };
 
-        const createdUrl = await urls.insert(newUrl);
+        // const createdUrl = await urls.insert(newUrl);
+        
+
+
 
         res.json(createdUrl);
     } catch (error) {

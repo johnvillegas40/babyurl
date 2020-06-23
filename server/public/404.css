@@ -10,17 +10,17 @@
   }
   
   body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cascadia Code', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #524f4f;
+    background-color: #141B41;
   }
   
   .not-found {
     margin: 1rem 0;
-    color: #ffffff;
+    color: #EEE1B3;
     font-size: 3rem;
     font-weight: normal;
   }
@@ -28,7 +28,7 @@
   .go-home-link {
     display: flex;
     align-items: center;
-    color: #ffffff;
+    color: #EEE1B3;
     font-size: 1.5rem;
   }
   
@@ -40,3 +40,52 @@
   .go-home-link:hover .arrow {
     transform: translateX(10px);
   }
+
+  .footer {
+    position: absolute;
+    color: #eee1b3;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+
+    text-align: center;
+}
+
+.bmc-button img {
+    height: 28px !important;
+    width: 28px !important;
+    margin-bottom: 1px !important;
+    box-shadow: none !important;
+    border: none !important;
+    vertical-align: middle !important;
+}
+.bmc-button {
+    padding: 7px 15px 7px 10px !important;
+    line-height: 35px !important;
+    height: 51px !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    color: #eee1b3 !important;
+    background-color: #00a8f3 !important;
+    border-radius: 5px !important;
+    border: 1px solid transparent !important;
+    padding: 7px 15px 7px 10px !important;
+    box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+    margin: 0 auto !important;
+    -webkit-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+}
+.bmc-button:hover,
+.bmc-button:active,
+.bmc-button:focus {
+    -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+    text-decoration: none !important;
+    box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+    opacity: 0.85 !important;
+    color: #eee1b3 !important;
+}
+.coffeeText {
+    margin-left:5px;
+}

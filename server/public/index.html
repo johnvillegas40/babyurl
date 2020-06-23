@@ -1,33 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>babyURL</title>
 
-        <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body>
-        <header>
-            <img class="logo" src="https://i.imgur.com/6S9PbJ4.png">
-        </header>
-        <main id="app">
+<head>
+    <meta charset="UTF-8" />
+    <title>babyURL</title>
 
-            <form class="form" v-if="formVisible" @submit.prevent="createUrl()">
-                <div v-if="error" class="error">
-                    {{error}}
-                  </div>            
-                <input class="input" type="text" v-model="url" name="url" id="url" placeholder="enter a url" />
-                <input class="input" type="text" v-model="slug" name="slug" id="slug" placeholder="enter a slug (optional)"/>
-                <button type="submit" class="create">create</button>
-            </form>
+    <link rel="stylesheet" href="styles.css" />
+</head>
 
-            <div v-if="created">
-                <p class="created">your short url is: <a :href="created">{{created}}</a></p>
+<body>
+    <header>
+        <img class="logo" src="./logo/babyurl blue.png" />
+    </header>
+    <main id="app">
+        <form autocomplete="off" class="form" v-if="formVisible" @submit.prevent="createUrl()">
+            <div v-if="error" class="error">
+                {{error}}
             </div>
+            <input class="input" type="text" v-model="url" name="url" id="url" placeholder="enter a url" />
+            <input class="input" type="text" v-model="slug" name="slug" id="slug"
+                placeholder="enter a slug (optional)" />
+            <button type="submit" class="create">create</button>
+        </form>
 
-        </main>
+        <div v-if="created">
+            <p class="created">
+                your baby url is: <a :href="created">{{created}}</a>
+            </p>
+            <div class="form">
+                <button onclick="window.location.href='/'" class="create">
+                    new url
+                </button>
+            </div>
+        </div>
+    </main>
 
-        <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
-        <script src="index.js"></script>
-    </body>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+    <script src="index.js"></script>
+</body>
+<footer class="footer">
+    <p>
+        no ads, no logging, free for all. <style></style>
+        <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/johnnyvillegas"><img
+                src="./logo/coffee.svg" alt="Buy me a coffee" /><span
+                class="coffeeText">support with coffee</span></a>
+    </p>
+</footer>
+
 </html>
