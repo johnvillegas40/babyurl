@@ -9,7 +9,14 @@ require("dotenv").config();
 require("firebase/database")
 
 const firebaseConfig = {
-
+    apiKey: process.env.APIKEY,
+    authDomain: process.env.DOMAIN,
+    databaseURL: process.env.DBURL,
+    projectId: "babyurl",
+    storageBucket: process.env.BUCKET,
+    messagingSenderId: process.env.SENDERID,
+    appId: process.env.APPID,
+    measurementId: process.env.MEASUREMENT
   };
 
 firebase.initializeApp(firebaseConfig)
@@ -43,8 +50,10 @@ app.get("/:id", async (req, res) => {
                 });
         if (url) {
             res.redirect(301, url.url);
+        } else {
+            res.status(404).sendFile(notFoundPath)
         }
-        res.status(404).sendFile(notFoundPath)
+        
     } catch (error) {
         res.status(404).sendFile(notFoundPath)
     }
