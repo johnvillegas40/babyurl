@@ -96,7 +96,6 @@ app.post("/url", async (req, res, next) => {
                 throw new Error("Slug in use.");
             }
         }
-        slug = slug.toLowerCase();
 
         const newUrl = {
             url,
