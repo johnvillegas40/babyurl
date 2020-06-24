@@ -25,7 +25,7 @@ const app = new Vue({
                 const result = await response.json();
                 const res = JSON.parse(result)
                 this.formVisible = false;
-                this.created = `https://www.babyurl.dev/${res.slug}`;
+                this.created = `babyurl.dev/${res.slug}`;
             } else {
                 const result = await response.json();
                 this.error = result.message;
