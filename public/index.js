@@ -23,14 +23,15 @@ const app = new Vue({
             });
             if (response.ok) {
                 const result = await response.json();
+                const res = JSON.parse(result)
                 this.formVisible = false;
-                this.created = `https://babyurl.dev/${result.slug}`;
+                this.created = `https://babyurl.dev/${res.slug}`;
             } else {
                 const result = await response.json();
                 this.error = result.message;
             }
 
-            this.created = await response.json();
+            
         }
     }
 })
