@@ -149,3 +149,7 @@ header {
 .coffeeText {
     margin-left:5px;
 }
+
+[v-cloak] {
+    display: none;
+}

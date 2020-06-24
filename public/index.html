@@ -14,7 +14,7 @@
     </header>
     <main id="app">
         <form autocomplete="off" class="form" v-if="formVisible" @submit.prevent="createUrl()">
-            <div v-if="error" class="error">
+            <div v-cloak v-if="error" class="error">
                 {{error}}
             </div>
             <input class="input" type="text" v-model="url" name="url" id="url" placeholder="enter a url" />
@@ -23,7 +23,7 @@
             <button type="submit" class="create">create</button>
         </form>
 
-        <div v-if="created">
+        <div v-cloak v-if="created">
             <p class="created">
                 your baby url is: <a :href="created">{{created}}</a>
             </p>
