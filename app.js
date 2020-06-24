@@ -118,8 +118,17 @@ app.post("/url", async (req, res, next) => {
 
 app.use((error, req, res, next) => {
     if (error.status) {
+        
         res.status(error.status);
     } else {
+        console.log(error.message)
+        if (error.message === 'url must be a valid URL') {
+            error.message = "enter a valid url"
+        } else if (error.message.includes("slug must match the following:")) {
+            error.message = "alphanumeric slug only 🐌"
+        } else if (error.message.includes("Slug in use")) {
+            error.message = "slug stolen already 🐌"
+        }
         res.status(500);
     }
     res.json({
