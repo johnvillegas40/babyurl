@@ -31,7 +31,7 @@
 
         <div v-cloak v-if="created">
             <p class="created">
-                your baby url is: <a v-bind:href="created">{{created}}</a>
+                your baby url is: <a v-bind:href="'https://' + created">{{created}}</a>
             </p>
             <div class="form">
                 <button onclick="window.location.href='/'" class="create">
