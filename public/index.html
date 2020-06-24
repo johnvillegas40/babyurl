@@ -12,9 +12,14 @@
 <body>
     <header>
         <img class="logo" src="./logo/babyurl blue.png" />
+        
     </header>
+    <div class="slogan">
+        <p>url shortener for everyone</p>
+    </div>
     <main id="app">
         <form autocomplete="off" class="form" v-if="formVisible" @submit.prevent="createUrl()">
+            
             <div v-cloak v-if="error" class="error">
                 {{error}}
             </div>

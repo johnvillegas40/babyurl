@@ -26,6 +26,13 @@ header {
     margin-bottom: 3rem;
 }
 
+.slogan {
+    display: flex;
+    flex-direction: column;
+    color: #eee1b3;
+    padding-bottom: 4em;
+}
+
 .logo {
     max-width: 90%;
     image-rendering: -moz-crisp-edges;
