@@ -103,12 +103,14 @@ app.post("/url", async (req, res, next) => {
             slug,
         };
 
+        
+
 
         const createdUrl = await writeUserData(newUrl)
+        const jsonURL = JSON.stringify(newUrl)
 
 
-
-        res.json(newUrl);
+        res.json(jsonURL);
     } catch (error) {
         next(error);
     }
