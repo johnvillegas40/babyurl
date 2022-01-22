@@ -15,7 +15,7 @@
     "firebase": "^7.15.4",
     "helmet": "^3.23.1",
     "morgan": "^1.10.0",
-    "nanoid": "^3.1.10",
+    "nanoid": "^3.1.31",
     "yup": "^0.29.1"
   },
   "devDependencies": {
